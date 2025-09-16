@@ -2,7 +2,7 @@
 import { build, type BuildConfig } from "bun";
 import plugin from "bun-plugin-tailwind";
 import { existsSync } from "fs";
-import { rm } from "fs/promises";
+import { rm, cp } from "fs/promises";
 import path from "path";
 
 // Print help text if requested
@@ -37,7 +37,7 @@ Example:
 
 // Helper function to convert kebab-case to camelCase
 const toCamelCase = (str: string): string => {
-  return str.replace(/-([a-z])/g, g => g[1].toUpperCase());
+  return str.replace(/-([a-z])/g, (g) => g[1].toUpperCase());
 };
 
 // Helper function to parse a value into appropriate type
@@ -51,7 +51,7 @@ const parseValue = (value: string): any => {
   if (/^\d*\.\d+$/.test(value)) return parseFloat(value);
 
   // Handle arrays (comma-separated)
-  if (value.includes(",")) return value.split(",").map(v => v.trim());
+  if (value.includes(",")) return value.split(",").map((v) => v.trim());
 
   // Default to string
   return value;
@@ -74,7 +74,10 @@ function parseArgs(): Partial<BuildConfig> {
     }
 
     // Handle --flag (boolean true)
-    if (!arg.includes("=") && (i === args.length - 1 || args[i + 1].startsWith("--"))) {
+    if (
+      !arg.includes("=") &&
+      (i === args.length - 1 || args[i + 1].startsWith("--"))
+    ) {
       const key = toCamelCase(arg.slice(2));
       config[key] = true;
       continue;
@@ -132,13 +135,19 @@ if (existsSync(outdir)) {
   await rm(outdir, { recursive: true, force: true });
 }
 
+await cp("CNAME", `${outdir}/CNAME`);
+
 const start = performance.now();
 
 // Scan for all HTML files in the project
 const entrypoints = [...new Bun.Glob("**.html").scanSync("src")]
-  .map(a => path.resolve("src", a))
-  .filter(dir => !dir.includes("node_modules"));
-console.log(`📄 Found ${entrypoints.length} HTML ${entrypoints.length === 1 ? "file" : "files"} to process\n`);
+  .map((a) => path.resolve("src", a))
+  .filter((dir) => !dir.includes("node_modules"));
+console.log(
+  `📄 Found ${entrypoints.length} HTML ${
+    entrypoints.length === 1 ? "file" : "files"
+  } to process\n`
+);
 
 // Build all the HTML files
 const result = await build({
@@ -157,10 +166,10 @@ const result = await build({
 // Print the results
 const end = performance.now();
 
-const outputTable = result.outputs.map(output => ({
-  "File": path.relative(process.cwd(), output.path),
-  "Type": output.kind,
-  "Size": formatFileSize(output.size),
+const outputTable = result.outputs.map((output) => ({
+  File: path.relative(process.cwd(), output.path),
+  Type: output.kind,
+  Size: formatFileSize(output.size),
 }));
 
 console.table(outputTable);
