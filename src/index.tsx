@@ -12,15 +12,6 @@ const server = serve({
         "Content-Type": "application/json",
       },
     }),
-
-    // "/essays.json": {
-    //   async GET(req) {
-    //     return Response.json({
-    //       message: "Hello, world!",
-    //       method: "GET",
-    //     });
-    //   }
-    // },
   },
 
   development: process.env.NODE_ENV !== "production",

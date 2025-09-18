@@ -5,6 +5,7 @@ import logo from "./logo.svg";
 import reactLogo from "./react.svg";
 import { createContext, useContext, useEffect, useState } from "react";
 import Router, { Route, Switch } from "crossroad";
+import Markdown from "react-markdown";
 
 const EssayContext = createContext(null);
 
@@ -30,17 +31,26 @@ export function App() {
   return (
     <EssayContext value={essays}>
       <Router>
-        <nav class="flex flex-col">
-          <LeftItem text="Home" />
-          <LeftItem text="Essays" />
+        <div className="flex flex-row py-12">
+          {/* <div className=" flex flex-row"> */}
 
-          {essays.map((essayTitle) => (
-            <LeftItem text={essayTitle.title} href={essayTitle.url} />
-          ))}
-        </nav>
+          <nav class="flex flex-col">
+            <LeftItem text="Home" />
+            <LeftItem text="Essays" />
 
-        <Route path="/" component={HomePage} />
-        <Route path="/essays/:slug" component={EssayPage} children={essays} />
+            {essays.map((essayTitle) => (
+              <LeftItem text={essayTitle.title} href={essayTitle.url} />
+            ))}
+          </nav>
+          <div className="max-w-5xl mx-auto px-8 relative z-10">
+            <Route path="/" component={HomePage} />
+            <Route
+              path="/essays/:slug"
+              component={EssayPage}
+              children={essays}
+            />
+          </div>
+        </div>
       </Router>
     </EssayContext>
   );
@@ -52,18 +62,13 @@ function EssayPage(props) {
     return essay.url.endsWith(props.slug);
   });
 
+  //  <h1 className="text-4xl font-bold my-4 leading-tight">
+  //     Hassan Shaikley
+  //   </h1>
+
   return (
-    <div className="max-w-7xl mx-auto p-8 relative z-10 flex flex-row">
-      <div className="w-48"></div>
-
-      <div>
-        <h1 className="text-4xl font-bold my-4 leading-tight">
-          Hassan Shaikley
-        </h1>
-
-        <div></div>
-        <APITester />
-      </div>
+    <div className="flex flex-col gap-y-2">
+      <Markdown>{essay && essay.body}</Markdown>
     </div>
   );
 }
