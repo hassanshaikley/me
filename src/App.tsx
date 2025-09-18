@@ -4,7 +4,7 @@ import { APITester } from "./APITester";
 import logo from "./logo.svg";
 import reactLogo from "./react.svg";
 import { createContext, useContext, useEffect, useState } from "react";
-import Router, { Route, Switch } from "crossroad";
+
 import Markdown from "react-markdown";
 
 const EssayContext = createContext(null);
@@ -30,27 +30,24 @@ export function App() {
 
   return (
     <EssayContext value={essays}>
-      <Router>
-        <div className="flex flex-row py-12 max-w-5xl mx-auto">
-          {/* <div className=" flex flex-row"> */}
+      <div className="flex flex-row py-12 max-w-5xl mx-auto">
+        {/* <div className=" flex flex-row"> */}
 
-          <nav class="flex flex-col w-64">
-            <h1 className="text-2xl font-bold my-4 leading-tight">
-              Hassan Shaikley
-            </h1>
-            <LeftItem text="Home" href="/" />
-            <LeftItem text="Essays" small={true} />
+        <nav class="flex flex-col w-64">
+          <h1 className="text-2xl font-bold my-4 leading-tight">
+            Hassan Shaikley
+          </h1>
+          <LeftItem text="Home" href="/" />
+          <LeftItem text="Essays" small={true} />
 
-            {essays.map((essayTitle) => (
-              <LeftItem text={essayTitle.title} href={essayTitle.url} />
-            ))}
-          </nav>
-          <div className="mx-auto px-8  z-10 w-full my-16">
-            <Route path="/" component={HomePage} />
-            <Route path="/essays/:slug" component={EssayPage} />
-          </div>
+          {essays.map((essayTitle) => (
+            <LeftItem text={essayTitle.title} href={essayTitle.url} />
+          ))}
+        </nav>
+        <div className="mx-auto px-8  z-10 w-full my-16">
+          <HomePage />
         </div>
-      </Router>
+      </div>
     </EssayContext>
   );
 }

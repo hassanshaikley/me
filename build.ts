@@ -2,11 +2,31 @@
 import { build, type BuildConfig } from "bun";
 import plugin from "bun-plugin-tailwind";
 import { existsSync } from "fs";
+import { mkdir } from "fs/promises";
 import { writeFile } from "fs/promises";
 import { readdir } from "fs/promises";
 import { readFile } from "fs/promises";
 import { rm, cp } from "fs/promises";
 import path from "path";
+
+function GENERATE_HTML_PAGE(props) {
+  return `
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="./logo.svg" />
+    <title>Hassan Shaikley</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="./app.js"></script>
+    ${props.inner_html}
+  </body>
+</html>
+`;
+}
 
 // Print help text if requested
 if (process.argv.includes("--help") || process.argv.includes("-h")) {
@@ -139,17 +159,25 @@ if (existsSync(outdir)) {
 }
 
 await cp("CNAME", `${outdir}/CNAME`);
+await cp("src/app.js", `${outdir}/app.js`);
 
 const essays = await readdir("essays");
 
 let essayJson: any = {};
 
+await mkdir(`${outdir}/essays/`);
+
 await await Promise.all(
   essays.map(async (essay) => {
-    // await cp(`essays/${essay}`, `${outdir}/essays/${essay}`);
     const markdown = await readFile(`essays/${essay}`, "utf8");
 
-    essayJson[essay] = markdown;
+    const html = GENERATE_HTML_PAGE({ inner_html: markdown });
+
+    await writeFile(
+      `${outdir}/essays/${essay.replace(".md", "")}.html`,
+      html,
+      "utf8"
+    );
   })
 );
 // console.log(essayJson);
@@ -158,7 +186,7 @@ await await Promise.all(
 
 // const data = new Uint8Array(Buffer.from(essayJson));
 
-await writeFile(`${outdir}/essays.json`, JSON.stringify(essayJson), "utf8");
+// await writeFile(`${outdir}/essays.json`, JSON.stringify(essayJson), "utf8");
 
 const start = performance.now();
 
