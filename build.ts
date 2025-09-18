@@ -137,6 +137,8 @@ if (existsSync(outdir)) {
 
 await cp("CNAME", `${outdir}/CNAME`);
 
+await cp("essays", `${outdir}/essays`, { recursive: true });
+
 const start = performance.now();
 
 // Scan for all HTML files in the project
