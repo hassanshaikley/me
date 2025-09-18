@@ -18,6 +18,8 @@ function GENERATE_HTML_PAGE(props) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="./logo.svg" />
     <title>Hassan Shaikley</title>
+    <link rel="stylesheet" href="/index.css">
+
   </head>
   <body>
     <div id="root"></div>
@@ -180,6 +182,12 @@ await await Promise.all(
     );
   })
 );
+
+const index_html = GENERATE_HTML_PAGE({ inner_html: "Hello World" });
+
+await writeFile(`${outdir}/index.html`, index_html, "utf8");
+await cp("src/index.css", `${outdir}/index.css`);
+
 // console.log(essayJson);
 
 // await cp("essays", `${outdir}/essays`, { recursive: true });
@@ -187,43 +195,3 @@ await await Promise.all(
 // const data = new Uint8Array(Buffer.from(essayJson));
 
 // await writeFile(`${outdir}/essays.json`, JSON.stringify(essayJson), "utf8");
-
-const start = performance.now();
-
-// Scan for all HTML files in the project
-const entrypoints = [...new Bun.Glob("**.html").scanSync("src")]
-  .map((a) => path.resolve("src", a))
-  .filter((dir) => !dir.includes("node_modules"));
-console.log(
-  `📄 Found ${entrypoints.length} HTML ${
-    entrypoints.length === 1 ? "file" : "files"
-  } to process\n`
-);
-
-// Build all the HTML files
-const result = await build({
-  entrypoints,
-  outdir,
-  plugins: [plugin],
-  minify: true,
-  target: "browser",
-  sourcemap: "linked",
-  define: {
-    "process.env.NODE_ENV": JSON.stringify("production"),
-  },
-  ...cliConfig, // Merge in any CLI-provided options
-});
-
-// Print the results
-const end = performance.now();
-
-const outputTable = result.outputs.map((output) => ({
-  File: path.relative(process.cwd(), output.path),
-  Type: output.kind,
-  Size: formatFileSize(output.size),
-}));
-
-console.table(outputTable);
-const buildTime = (end - start).toFixed(2);
-
-console.log(`\n✅ Build completed in ${buildTime}ms\n`);
