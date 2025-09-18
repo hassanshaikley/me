@@ -2,6 +2,9 @@
 import { build, type BuildConfig } from "bun";
 import plugin from "bun-plugin-tailwind";
 import { existsSync } from "fs";
+import { writeFile } from "fs/promises";
+import { readdir } from "fs/promises";
+import { readFile } from "fs/promises";
 import { rm, cp } from "fs/promises";
 import path from "path";
 
@@ -137,7 +140,25 @@ if (existsSync(outdir)) {
 
 await cp("CNAME", `${outdir}/CNAME`);
 
-await cp("essays", `${outdir}/essays`, { recursive: true });
+const essays = await readdir("essays");
+
+let essayJson: any = {};
+
+await await Promise.all(
+  essays.map(async (essay) => {
+    // await cp(`essays/${essay}`, `${outdir}/essays/${essay}`);
+    const markdown = await readFile(`essays/${essay}`, "utf8");
+
+    essayJson[essay] = markdown;
+  })
+);
+// console.log(essayJson);
+
+// await cp("essays", `${outdir}/essays`, { recursive: true });
+
+// const data = new Uint8Array(Buffer.from(essayJson));
+
+await writeFile(`${outdir}/essays.json`, JSON.stringify(essayJson), "utf8");
 
 const start = performance.now();
 
