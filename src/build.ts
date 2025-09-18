@@ -3,11 +3,13 @@ import { build, type BuildConfig } from "bun";
 import plugin from "bun-plugin-tailwind";
 import { existsSync } from "fs";
 import { mkdir } from "fs/promises";
+import { rmdir } from "fs/promises";
 import { writeFile } from "fs/promises";
 import { readdir } from "fs/promises";
 import { readFile } from "fs/promises";
 import { rm, cp } from "fs/promises";
 import path from "path";
+console.log("OK?");
 
 function GENERATE_HTML_PAGE(props) {
   return `
@@ -22,9 +24,21 @@ function GENERATE_HTML_PAGE(props) {
 
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="./app.js"></script>
+
+    <script type="module" src="./index.js"></script>
+
+
+    <div style="display: flex; flex-direction: column;>
+    <div>
+    Hassan Shaikley / Left
+    </div>
+    <div>
+    Ho / Right
+    </div>
+      
     ${props.inner_html}
+    </div>
+
   </body>
 </html>
 `;
@@ -161,13 +175,18 @@ if (existsSync(outdir)) {
 }
 
 await cp("CNAME", `${outdir}/CNAME`);
-await cp("src/app.js", `${outdir}/app.js`);
+await cp("src/index.js", `${outdir}/index.js`);
 
 const essays = await readdir("essays");
 
 let essayJson: any = {};
 
-await mkdir(`${outdir}/essays/`);
+try {
+  await rmdir(`${outdir}/essays/`, { force: true });
+} catch (e) {}
+try {
+  await mkdir(`${outdir}/essays/`);
+} catch (e) {}
 
 await await Promise.all(
   essays.map(async (essay) => {
@@ -187,11 +206,3 @@ const index_html = GENERATE_HTML_PAGE({ inner_html: "Hello World" });
 
 await writeFile(`${outdir}/index.html`, index_html, "utf8");
 await cp("src/index.css", `${outdir}/index.css`);
-
-// console.log(essayJson);
-
-// await cp("essays", `${outdir}/essays`, { recursive: true });
-
-// const data = new Uint8Array(Buffer.from(essayJson));
-
-// await writeFile(`${outdir}/essays.json`, JSON.stringify(essayJson), "utf8");
