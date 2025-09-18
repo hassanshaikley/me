@@ -17,7 +17,7 @@ export function App() {
         <h1 className="text-4xl font-bold my-4 leading-tight">
           Hassan Shaikley
         </h1>
-        <p>What's up doc</p>
+        <div></div>
         <APITester />
       </div>
     </div>
