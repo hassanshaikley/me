@@ -31,24 +31,23 @@ export function App() {
   return (
     <EssayContext value={essays}>
       <Router>
-        <div className="flex flex-row py-12">
+        <div className="flex flex-row py-12 max-w-5xl mx-auto">
           {/* <div className=" flex flex-row"> */}
 
-          <nav class="flex flex-col">
-            <LeftItem text="Home" />
-            <LeftItem text="Essays" />
+          <nav class="flex flex-col w-64">
+            <h1 className="text-2xl font-bold my-4 leading-tight">
+              Hassan Shaikley
+            </h1>
+            <LeftItem text="Home" href="/" />
+            <LeftItem text="Essays" small={true} />
 
             {essays.map((essayTitle) => (
               <LeftItem text={essayTitle.title} href={essayTitle.url} />
             ))}
           </nav>
-          <div className="max-w-5xl mx-auto px-8 relative z-10">
+          <div className="mx-auto px-8  z-10 w-full my-16">
             <Route path="/" component={HomePage} />
-            <Route
-              path="/essays/:slug"
-              component={EssayPage}
-              children={essays}
-            />
+            <Route path="/essays/:slug" component={EssayPage} />
           </div>
         </div>
       </Router>
@@ -62,10 +61,6 @@ function EssayPage(props) {
     return essay.url.endsWith(props.slug);
   });
 
-  //  <h1 className="text-4xl font-bold my-4 leading-tight">
-  //     Hassan Shaikley
-  //   </h1>
-
   return (
     <div className="flex flex-col gap-y-2">
       <Markdown>{essay && essay.body}</Markdown>
@@ -73,20 +68,7 @@ function EssayPage(props) {
   );
 }
 function HomePage(props) {
-  return (
-    <div className="max-w-7xl mx-auto p-8 relative z-10 flex flex-row">
-      <div className="w-48"></div>
-
-      <div>
-        <h1 className="text-4xl font-bold my-4 leading-tight">
-          Hassan Shaikley
-        </h1>
-
-        <div></div>
-        <APITester />
-      </div>
-    </div>
-  );
+  return <div className="flex flex-col">Something</div>;
 }
 
 function kebabToTitleCase(str) {
