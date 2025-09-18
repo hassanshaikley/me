@@ -24,3 +24,7 @@ a:hover {
   text-decoration: underline;
   background-color: rgba(250, 250, 250);
 }
+
+small {
+  font-size: 14px;
+}

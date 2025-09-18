@@ -10,4 +10,4 @@ It is not much of a game at this point in time but you can walk around (wasd), o
 
 You can also see other players but they aren't animated well and there may be some bugs!
 
-Regardless I am still proud of this as it was challenging to do without any 3D libraries (only used libraries for matrix math and sockets). This was more or less a custom game engine.
+Regardless I am still proud of this as it was challenging to do without any 3D libraries. The only two libraries used were for matrix math and sockets. This was more or less a custom game engine.

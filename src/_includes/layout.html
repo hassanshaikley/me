@@ -1,26 +1,35 @@
 <!DOCTYPE html>
-<html>
+<html class="h-full">
   <header>
     <link rel="stylesheet" href="/index.css" />
 
     <title>{{ title }}</title>
   </header>
 
-  <body class="max-w-4xl m-auto flex md:flex-row flex-col mt-16 px-1 md:px-4">
-    <div class="w-96 flex flex-col mx-auto md:mb-0 mb-8 text-2xl md:text-lg">
-      <a href="/" class="text-2xl py-1 px-2 font-mono">Hassan Shaikley</a>
-      <div class="text-sm text-zinc-500">Essays</div>
-      <a class="py-1 px-2 font-mono" href="/digital-plastic/index.html"
-        >AI is Just Digital Plastic</a
-      >
-      <div class="text-sm text-zinc-500">Projects</div>
-      <a class="py-1 px-2 font-mono" href="/cred/index.html">Cred (WebGPU)</a>
-      <a class="py-1 px-2 font-mono" href="/pico-pubsub/index.html"
-        >Pico-Pubsub (JS)</a
-      >
-      <!--a class="py-1 px-2" href="/grand-piano-keys/index.html"
+  <body class="max-w-4xl m-auto flex flex-col min-h-screen">
+    <div class="flex md:flex-row flex-col mt-16 px-1 md:px-4 flex-1">
+      <div class="w-96 flex flex-col mx-auto md:mb-0 mb-8 text-2xl md:text-lg">
+        <a href="/" class="text-2xl py-1 px-2 font-mono">Hassan Shaikley</a>
+        <div class="text-sm text-zinc-500">Essays</div>
+        <a class="py-1 px-2 font-mono" href="/digital-plastic/index.html"
+          >AI is Just Digital Plastic</a
+        >
+        <div class="text-sm text-zinc-500">Projects</div>
+        <a class="py-1 px-2 font-mono" href="/cred/index.html">Cred (WebGPU)</a>
+        <a class="py-1 px-2 font-mono" href="/pico-pubsub/index.html"
+          >Pico-Pubsub (JS)</a
+        >
+        <!--a class="py-1 px-2" href="/grand-piano-keys/index.html"
         >Creating the Arcade Game Grand Piano Keys</a
-    --></div>
-    <div class="w-full">{{ content }}</div>
+    -->
+      </div>
+      <div class="w-full">{{ content }}</div>
+    </div>
+
+    <div class="container mx-auto px-4 mt-16 mb-8 bottom-0">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div></div>
+      </div>
+    </div>
   </body>
 </html>
