@@ -1,5 +1,9 @@
 body {
-  background-color: #ccc;
+  background-color: #eee;
+}
+h1 {
+  font-size: 32px;
+  font-family: monospace;
 }
 svg {
   position: fixed;
