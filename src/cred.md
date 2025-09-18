@@ -6,8 +6,10 @@ layout: layout.html
 
 [WebGPU Prototype under 25 KBs.](https://cred.fly.dev/html/index.html)
 
-It is not much of a game at this point in time but you can walk around (wasd), open the door (right click), and swing your sword (left click) which can't harm anything.
+Likely is not supported on your mobile browser.
 
-You can also see other players but they aren't animated well and there may be some bugs!
+Walk walk around with wasd, open the door with ight click, and swing your sword with left click. You can't harm anything with the sword.
 
-Regardless I am still proud of this as it was challenging to do without any 3D libraries. The only two libraries used were for matrix math and sockets. This was more or less a custom game engine.
+You can also see other players but they aren't animated much at all.
+
+The only two libraries used were for matrix math and sockets, so all the GPU code was handmade at a time when very few resources existed for WebGPU.
