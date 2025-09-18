@@ -6,11 +6,16 @@
   "main": "src/devserver.tsx",
   "module": "src/devserver.tsx",
   "scripts": {
-    "dev": "bun --hot src/devserver.tsx",
+    "dev": "bunx @11ty/eleventy --serve",
     "start": "NODE_ENV=production bun src/devserver.tsx",
     "build": "bun run src/build.ts"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@tailwindcss/postcss": "^4.1.13",
+    "markdown-it": "^14.1.0",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.13"
+  },
   "devDependencies": {
     "@11ty/eleventy": "^3.1.2"
   }
