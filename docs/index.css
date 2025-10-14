@@ -265,6 +265,9 @@
   .py-1 {
     padding-block: calc(var(--spacing) * 1);
   }
+  .text-center {
+    text-align: center;
+  }
   .font-mono {
     font-family: var(--font-mono);
   }
@@ -328,4 +331,8 @@ a:hover {
 }
 small {
   font-size: 14px;
+}
+h2 {
+  font-size: 22px;
+  font-family: monospace;
 }

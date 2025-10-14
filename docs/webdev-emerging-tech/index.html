@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html class="h-full">
+  <header>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" href="/index.css" />
+
+    <title></title>
+  </header>
+
+  <body class="max-w-4xl m-auto flex flex-col min-h-screen">
+    <div class="flex md:flex-row flex-col mt-16 px-1 md:px-4 flex-1">
+      <div class="w-96 flex flex-col mx-auto md:mb-0 mb-8 text-2xl md:text-lg">
+        <a href="/" class="text-2xl py-1 px-2 font-mono">Hassan Shaikley</a>
+        <div class="text-sm text-zinc-500">Essays</div>
+        <!--a class="py-1 px-2 font-mono" href="/digital-plastic/index.html"
+          >AI is Just Digital Plastic</a
+      -->
+        <a class="py-1 px-2 font-mono" href="/webdev-emerging-tech/index.html"
+          >Three Important Emerging Technologies for WebDevs
+        </a>
+        <div class="text-sm text-zinc-500">Projects</div>
+        <a class="py-1 px-2 font-mono" href="/cred/index.html">Cred (WebGPU)</a>
+        <a class="py-1 px-2 font-mono" href="/pico-pubsub/index.html"
+          >Pico-Pubsub (JS)</a
+        >
+
+        <!-- <div class="text-sm text-zinc-500">Random</div> -->
+        <!-- <a class="py-1 px-2 font-mono" href="/rip/index.html">RIP</a> -->
+
+        <!--a class="py-1 px-2" href="/grand-piano-keys/index.html"
+        >Creating the Arcade Game Grand Piano Keys</a
+    -->
+      </div>
+      <div class="w-full"><p><small>December 6, 2024</small></p>
+<h1>Three Important Emerging Technologies for WebDevs</h1>
+<p>There are three emerging technologies that are really important for web devs.</p>
+<h2>Bun</h2>
+<p>Bun will run your tests suites much faster, it will make your CI/CD pipelines faster (and cheaper), It will make you more productive and you will spend less time in config hell. You can run typescript without pulling in other deps. It isn’t a drop in replacement quite yet but for new projects it is an incredible build and test tool, and hopefully soon it will be much more.</p>
+<p>It is successfully bringing convention over configuration into the JS/TS ecosystem.</p>
+<h2>WebGPU</h2>
+<p>WebGPU was very recently released and is what comes after WebGL. It introduces the concept of a Compute Shader.</p>
+<p>A Compute Shader is a Shader Stage that is used entirely for computing arbitrary information.¹</p>
+<p>This means that you can leverage the GPU for insane parallelization. The GPU is designed to parallelize computation for each pixel on a screen, so if you aren’t aware it’s like a processor dedicated to parallelization and rendering. But you can leverage the parallelization part. It doesn’t always improve performance, because of communication overhead between the CPU and the GPU. In some cases you will see incredible performance improvements from moving work over to a graphics card.</p>
+<h2>Elixir/Phoenix</h2>
+<p>I have been writing Elixir for 6 years and it has only gotten sweeter. It makes testing a breeze, instantiates a web application with a test database right there that you can write assertions against from the getgo. It leverages Ecto which is a really powerful querying dsl and migration tool. The productivity is incredible.</p>
+<p>Elixir runs on the BEAM which is a VM designed long, long ago for massive parallelization for the telecommunications domain. It was designed by a humble physicist and working with it reignited my love for software development. It is simply a joy to work with.</p>
+<p>But the kicker is LiveView.</p>
+<p>LiveView does SSR over websockets and their own version of components. It passes diffs in a sophisticated but understandable way via a lot of interesting optimizations that you can read about right here. Imagine a frontend tool that isn’t a black box. That you can write assertions against with ease, even assertions that match on one word being present. Or one word being present after you press a button. And they run really fast. Granted sometimes React makes more sense. It’s still good to know about, and absurdly powerful for the creation of internal tools and prototypes.</p>
+<p>[1] <a href="https://www.khronos.org/opengl/wiki/Compute_Shader">https://www.khronos.org/opengl/wiki/Compute_Shader</a></p>
+</div>
+    </div>
+
+    <div class="container mx-auto px-4 mt-16 mb-8 bottom-0 w-full">
+      <div
+        class="flex flex-col md:flex-row justify-between items-center m-auto"
+      >
+        <!-- <a class="text-center">Random</a> -->
+      </div>
+    </div>
+  </body>
+</html>

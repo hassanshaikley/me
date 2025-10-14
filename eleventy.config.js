@@ -10,6 +10,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/CNAME");
   //   eleventyConfig.addPassthroughCopy("src/index.css");
   eleventyConfig.addPassthroughCopy("src/index.js");
+  eleventyConfig.addPassthroughCopy("src/jeremy-rock.jpg");
 
   // >https://www.11ty.dev/docs/copy/
   eleventyConfig.setServerPassthroughCopyBehavior("passthrough");
